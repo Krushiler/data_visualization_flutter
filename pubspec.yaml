@@ -41,6 +41,7 @@ dependencies:
   stream_transform:
   provider:
   flutter_colorpicker: ^1.0.3
+  url_strategy: ^0.2.0
 
 dev_dependencies:
   flutter_test:
