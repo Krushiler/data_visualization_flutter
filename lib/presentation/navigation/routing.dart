@@ -17,22 +17,22 @@ class AppRouter {
           GoRoute(
             path: '/dashboard',
             name: Routes.dashboard.name,
-            pageBuilder: (context, state) => _page(const DashboardScreen()),
+            pageBuilder: (context, state) => _page(const DashboardScreen(), name: 'Dashboard'),
           ),
           GoRoute(
             path: '/line-chart',
             name: Routes.lineChart.name,
-            pageBuilder: (context, state) => _page(const LineBreedsScreen()),
+            pageBuilder: (context, state) => _page(const LineBreedsScreen(), name: 'Line'),
           ),
           GoRoute(
             path: '/scatter-chart',
             name: Routes.scatterChart.name,
-            pageBuilder: (context, state) => _page(const ScatterBreedsScreen()),
+            pageBuilder: (context, state) => _page(const ScatterBreedsScreen(), name: 'Scatter'),
           ),
           GoRoute(
             path: '/top-chart',
             name: Routes.topChart.name,
-            pageBuilder: (context, state) => _page(const TopBreedsScreen()),
+            pageBuilder: (context, state) => _page(const TopBreedsScreen(), name: 'Top'),
           ),
         ],
       ),
@@ -42,6 +42,6 @@ class AppRouter {
   get router => _router;
 }
 
-Page _page(Widget child) {
-  return MaterialPage(child: child);
+Page _page(Widget child, {String? name}) {
+  return MaterialPage(child: child, name: name);
 }

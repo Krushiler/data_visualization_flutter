@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class ThemeConfig {
-  final MaterialColor primaryColor;
-  final MaterialColor accentColor;
-  final bool? isDark;
+part 'theme_config.freezed.dart';
 
-  ThemeConfig({
-    required this.primaryColor,
-    required this.accentColor,
-    required this.isDark,
-  });
+@freezed
+class ThemeConfig with _$ThemeConfig {
+  const ThemeConfig._();
+
+  const factory ThemeConfig({
+    required MaterialColor primaryColor,
+    required MaterialColor accentColor,
+    required bool isDark,
+  }) = _ThemeConfig;
+
+  factory ThemeConfig.defaultTheme() => const ThemeConfig(
+        primaryColor: Colors.deepPurple,
+        accentColor: Colors.deepOrange,
+        isDark: false,
+      );
 }

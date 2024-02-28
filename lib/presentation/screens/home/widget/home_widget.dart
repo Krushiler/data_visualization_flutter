@@ -1,7 +1,9 @@
 import 'package:data_visualization/presentation/common/widgets/filter/breed_filter_view.dart';
+import 'package:data_visualization/presentation/common/widgets/theme/theme_picker_view.dart';
 import 'package:data_visualization/presentation/navigation/navigation.dart';
 import 'package:data_visualization/presentation/screens/home/bloc/home_cubit.dart';
 import 'package:data_visualization/presentation/style/kit/dimens.dart';
+import 'package:data_visualization/presentation/style/kit/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -126,9 +128,15 @@ class _HomeWidgetState extends State<HomeWidget> with SingleTickerProviderStateM
                     SizeTransition(
                       sizeFactor: menuAnimationController,
                       axis: Axis.horizontal,
-                      child: const Padding(
-                        padding: EdgeInsets.all(Dimens.md),
-                        child: BreedFilterView(),
+                      child: SingleChildScrollView(
+                        padding: const EdgeInsets.all(Dimens.md),
+                        child: Column(
+                          children: [
+                            const BreedFilterView(),
+                            Gap.md,
+                            const ThemePickerView(),
+                          ],
+                        ),
                       ),
                     ),
                   ],

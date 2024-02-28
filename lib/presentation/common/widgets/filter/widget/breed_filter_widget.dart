@@ -22,62 +22,60 @@ class _BreedFilterWidgetState extends State<BreedFilterWidget> {
         }
         return SizedBox(
           width: 400,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                rangeSlider('Рост', state.breeds.heightRange, state.breedFilter!.height, (value) {
+          child: Column(
+            children: [
+              rangeSlider('Рост', state.breeds.heightRange, state.breedFilter!.height, (value) {
+                context.read<BreedFilterBloc>().add(FilterChanged(state.breedFilter!.copyWith(
+                      height: Range(value.start.toInt(), value.end.toInt()),
+                    )));
+              }),
+              Gap.md,
+              rangeSlider('Вес', state.breeds.weightRange, state.breedFilter!.weight, (value) {
+                context.read<BreedFilterBloc>().add(FilterChanged(state.breedFilter!.copyWith(
+                      weight: Range(value.start.toInt(), value.end.toInt()),
+                    )));
+              }),
+              Gap.md,
+              rangeSlider('Время жизни', state.breeds.lifeSpanRange, state.breedFilter!.lifeSpan, (value) {
+                context.read<BreedFilterBloc>().add(FilterChanged(state.breedFilter!.copyWith(
+                      lifeSpan: Range(value.start.toInt(), value.end.toInt()),
+                    )));
+              }),
+              Gap.md,
+              rangeSlider('Цена', state.breeds.priceRange, state.breedFilter!.price, (value) {
+                context.read<BreedFilterBloc>().add(FilterChanged(state.breedFilter!.copyWith(
+                      price: Range(value.start.toInt(), value.end.toInt()),
+                    )));
+              }),
+              Gap.md,
+              rangeSlider('Рейтинг', state.breeds.ratingRange, state.breedFilter!.rating, (value) {
+                context.read<BreedFilterBloc>().add(FilterChanged(state.breedFilter!.copyWith(
+                      rating: Range(value.start.toInt(), value.end.toInt()),
+                    )));
+              }),
+              Gap.md,
+              select(
+                'Размер',
+                state.breedFilter!.mainType,
+                (value) {
                   context.read<BreedFilterBloc>().add(FilterChanged(state.breedFilter!.copyWith(
-                        height: Range(value.start.toInt(), value.end.toInt()),
+                        mainType: BreedRangeType.values.firstWhere((element) => element == value),
                       )));
-                }),
-                Gap.md,
-                rangeSlider('Вес', state.breeds.weightRange, state.breedFilter!.weight, (value) {
-                  context.read<BreedFilterBloc>().add(FilterChanged(state.breedFilter!.copyWith(
-                        weight: Range(value.start.toInt(), value.end.toInt()),
-                      )));
-                }),
-                Gap.md,
-                rangeSlider('Время жизни', state.breeds.lifeSpanRange, state.breedFilter!.lifeSpan, (value) {
-                  context.read<BreedFilterBloc>().add(FilterChanged(state.breedFilter!.copyWith(
-                        lifeSpan: Range(value.start.toInt(), value.end.toInt()),
-                      )));
-                }),
-                Gap.md,
-                rangeSlider('Цена', state.breeds.priceRange, state.breedFilter!.price, (value) {
-                  context.read<BreedFilterBloc>().add(FilterChanged(state.breedFilter!.copyWith(
-                        price: Range(value.start.toInt(), value.end.toInt()),
-                      )));
-                }),
-                Gap.md,
-                rangeSlider('Рейтинг', state.breeds.ratingRange, state.breedFilter!.rating, (value) {
-                  context.read<BreedFilterBloc>().add(FilterChanged(state.breedFilter!.copyWith(
-                        rating: Range(value.start.toInt(), value.end.toInt()),
-                      )));
-                }),
-                Gap.md,
-                select(
-                  'Размер',
-                  state.breedFilter!.mainType,
-                  (value) {
-                    context.read<BreedFilterBloc>().add(FilterChanged(state.breedFilter!.copyWith(
-                          mainType: BreedRangeType.values.firstWhere((element) => element == value),
-                        )));
-                  },
-                ),
-                Gap.md,
-                select('Ось X', state.breedFilter!.xAxisType, (value) {
-                  context.read<BreedFilterBloc>().add(FilterChanged(state.breedFilter!.copyWith(
-                        xAxisType: BreedRangeType.values.firstWhere((element) => element == value),
-                      )));
-                }),
-                Gap.md,
-                select('Ось Y', state.breedFilter!.yAxisType, (value) {
-                  context.read<BreedFilterBloc>().add(FilterChanged(state.breedFilter!.copyWith(
-                        yAxisType: BreedRangeType.values.firstWhere((element) => element == value),
-                      )));
-                }),
-              ],
-            ),
+                },
+              ),
+              Gap.md,
+              select('Ось X', state.breedFilter!.xAxisType, (value) {
+                context.read<BreedFilterBloc>().add(FilterChanged(state.breedFilter!.copyWith(
+                      xAxisType: BreedRangeType.values.firstWhere((element) => element == value),
+                    )));
+              }),
+              Gap.md,
+              select('Ось Y', state.breedFilter!.yAxisType, (value) {
+                context.read<BreedFilterBloc>().add(FilterChanged(state.breedFilter!.copyWith(
+                      yAxisType: BreedRangeType.values.firstWhere((element) => element == value),
+                    )));
+              }),
+            ],
           ),
         );
       },

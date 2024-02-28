@@ -1,3 +1,4 @@
+import 'package:data_visualization/domain/model/breed/breed_filter.dart';
 import 'package:data_visualization/presentation/common/widgets/charts/scatter_breeds_chart.dart';
 import 'package:data_visualization/presentation/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:data_visualization/presentation/screens/dashboard/widget/dashboard_bloc_provider.dart';
@@ -13,6 +14,7 @@ class ScatterBreedsScreen extends StatelessWidget {
     return DashboardBlocProvider(
       child: BlocBuilder<DashboardBloc, DashboardState>(
         builder: (context, state) {
+          final breedFilter = context.watch<BreedFilter>();
           if (state.breeds.isEmpty) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -24,8 +26,9 @@ class ScatterBreedsScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(Dimens.md),
                 child: ScatterBreedsChart(
                   state.breeds,
-                  xAxisType: state.breedFilter.xAxisType,
-                  yAxisType: state.breedFilter.yAxisType,
+                  xAxisType: breedFilter.xAxisType,
+                  yAxisType: breedFilter.yAxisType,
+                  sizeType: breedFilter.mainType,
                 ),
               ),
             ),

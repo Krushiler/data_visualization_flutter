@@ -1,3 +1,4 @@
+import 'package:data_visualization/domain/model/breed/breed_filter.dart';
 import 'package:data_visualization/presentation/common/widgets/charts/line_breeds_chart.dart';
 import 'package:data_visualization/presentation/common/widgets/charts/scatter_breeds_chart.dart';
 import 'package:data_visualization/presentation/common/widgets/charts/top_breeds_chart.dart';
@@ -20,6 +21,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (context, state) {
+        final breedFilter = context.watch<BreedFilter>();
         return Scaffold(
           body: SafeArea(
             child: Padding(
@@ -35,8 +37,9 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                 child: container(
                                   ScatterBreedsChart(
                                     state.breeds,
-                                    xAxisType: state.breedFilter.xAxisType,
-                                    yAxisType: state.breedFilter.yAxisType,
+                                    xAxisType: breedFilter.xAxisType,
+                                    yAxisType: breedFilter.yAxisType,
+                                    sizeType: breedFilter.mainType,
                                   ),
                                   onPressed: () {
                                     context.navigation.navigateToScatterChart();

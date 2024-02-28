@@ -21,16 +21,9 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> with Subscripti
     on<BreedsChanged>((event, emit) {
       emit(state.copyWith(breeds: event.breeds));
     });
-    on<_FilterChanged>((event, emit) {
-      emit(state.copyWith(breedFilter: event.filter));
-    });
-
 
     subscribe(_breedRepository.watchFilteredBreeds(), (breeds) {
       add(DashboardEvent.breedsChanged(breeds));
-    });
-    subscribe(_breedRepository.watchFilter(), (event) {
-      add(DashboardEvent.filterChanged(event));
     });
   }
 }

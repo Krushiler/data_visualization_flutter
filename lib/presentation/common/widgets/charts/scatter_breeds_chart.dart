@@ -1,5 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:data_visualization/domain/model/breed/breed.dart';
+import 'package:data_visualization/presentation/common/painters/scatter_painter.dart';
+import 'package:data_visualization/presentation/style/theme/app_context_extensions.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -7,8 +9,15 @@ class ScatterBreedsChart extends StatelessWidget {
   final List<Breed> breeds;
   final BreedRangeType xAxisType;
   final BreedRangeType yAxisType;
+  final BreedRangeType sizeType;
 
-  const ScatterBreedsChart(this.breeds, {super.key, required this.xAxisType, required this.yAxisType});
+  const ScatterBreedsChart(
+    this.breeds, {
+    super.key,
+    required this.xAxisType,
+    required this.yAxisType,
+    required this.sizeType,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +25,22 @@ class ScatterBreedsChart extends StatelessWidget {
   }
 
   Widget scatter(BuildContext context) {
+    final minMedian = breeds.minMedianByType(sizeType);
+    final maxMedian = breeds.maxMedianByType(sizeType);
+
     return ScatterChart(
       ScatterChartData(
         borderData: FlBorderData(show: false),
         scatterSpots: [
-          for (final breed in breeds) ScatterSpot(breed.getRange(xAxisType).median, breed.getRange(yAxisType).median),
+          for (final breed in breeds)
+            ScatterSpot(
+              breed.getRange(xAxisType).median,
+              breed.getRange(yAxisType).median,
+              dotPainter: ScatterPainter(
+                color: context.colors.accent.withOpacity(0.5),
+                sizeFactor: (breed.getRange(sizeType).median - minMedian) / (maxMedian - minMedian) * 4 + 0.5,
+              ),
+            ),
         ],
         scatterTouchData: ScatterTouchData(
           touchTooltipData: ScatterTouchTooltipData(

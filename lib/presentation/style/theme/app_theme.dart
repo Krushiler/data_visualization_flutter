@@ -8,7 +8,7 @@ class AppTheme {
   late final AppColors appColors = AppColors(
     primary: themeConfig.primaryColor,
     accent: themeConfig.accentColor,
-    brightness: themeConfig.isDark! ? Brightness.dark : Brightness.light,
+    brightness: themeConfig.isDark ? Brightness.dark : Brightness.light,
   );
 
   AppTheme(this.themeConfig);
@@ -26,6 +26,7 @@ class AppTheme {
         background: appColors.background,
         surface: appColors.accent.shade100,
         tertiaryContainer: appColors.accent.shade200,
+        brightness: appColors.brightness,
       ),
       tabBarTheme: TabBarTheme(
         overlayColor: MaterialStatePropertyAll<Color>(appColors.primary),

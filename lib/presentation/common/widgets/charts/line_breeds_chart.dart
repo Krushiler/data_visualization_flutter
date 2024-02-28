@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:data_visualization/domain/model/breed/breed.dart';
+import 'package:data_visualization/presentation/style/theme/app_context_extensions.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +38,10 @@ class LineBreedsChart extends StatelessWidget {
         lineBarsData: [
           LineChartBarData(
             spots: data.mapIndexed((index, value) => FlSpot(index.toDouble() + 1, value)).toList(),
-            dotData: const FlDotData(),
+            color: context.colors.accent,
+            dotData: FlDotData(
+              getDotPainter: (_, __, ___, ____) => FlDotCirclePainter(color: context.colors.accent),
+            ),
           ),
         ],
         minX: 0,

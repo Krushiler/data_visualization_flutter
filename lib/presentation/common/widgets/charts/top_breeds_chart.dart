@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:data_visualization/domain/model/breed/breed.dart';
 import 'package:data_visualization/presentation/style/kit/dimens.dart';
+import 'package:data_visualization/presentation/style/theme/app_context_extensions.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +30,10 @@ class TopBreedsChart extends StatelessWidget {
               BarChartGroupData(
                 x: index,
                 barRods: [
-                  BarChartRodData(toY: breed.rating.median),
+                  BarChartRodData(
+                    toY: breed.rating.median,
+                    color: context.colors.accent,
+                  ),
                 ],
               ),
           ],
