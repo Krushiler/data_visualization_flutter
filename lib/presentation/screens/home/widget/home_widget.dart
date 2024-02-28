@@ -2,8 +2,6 @@ import 'package:data_visualization/presentation/common/widgets/filter/breed_filt
 import 'package:data_visualization/presentation/navigation/navigation.dart';
 import 'package:data_visualization/presentation/screens/home/bloc/home_cubit.dart';
 import 'package:data_visualization/presentation/style/kit/dimens.dart';
-import 'package:data_visualization/presentation/style/kit/gap.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

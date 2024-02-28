@@ -1,5 +1,4 @@
 import 'package:data_visualization/domain/model/breed/breed.dart';
-import 'package:data_visualization/domain/model/breed/breed_filter.dart';
 import 'package:data_visualization/domain/model/common/range.dart';
 import 'package:data_visualization/presentation/common/widgets/filter/bloc/breed_filter_bloc.dart';
 import 'package:data_visualization/presentation/style/kit/gap.dart';

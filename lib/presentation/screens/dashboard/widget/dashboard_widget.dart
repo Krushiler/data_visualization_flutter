@@ -1,5 +1,3 @@
-import 'package:data_visualization/domain/model/breed/breed.dart';
-import 'package:data_visualization/presentation/common/widgets/charts/breeds_word_cloud.dart';
 import 'package:data_visualization/presentation/common/widgets/charts/line_breeds_chart.dart';
 import 'package:data_visualization/presentation/common/widgets/charts/scatter_breeds_chart.dart';
 import 'package:data_visualization/presentation/common/widgets/charts/top_breeds_chart.dart';
@@ -7,8 +5,6 @@ import 'package:data_visualization/presentation/navigation/navigation.dart';
 import 'package:data_visualization/presentation/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:data_visualization/presentation/style/kit/dimens.dart';
 import 'package:data_visualization/presentation/style/kit/gap.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -60,9 +56,13 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           child: Row(
                             children: [
                               Expanded(
-                                  child: container(LineBreedsChart(state.breeds), onPressed: () {
-                                context.navigation.navigateToLineChart();
-                              })),
+                                child: container(
+                                  LineBreedsChart(state.breeds),
+                                  onPressed: () {
+                                    context.navigation.navigateToLineChart();
+                                  },
+                                ),
+                              ),
                               // Gap.md,
                               // container(BreedsWordCloud(state.breeds)),
                             ],

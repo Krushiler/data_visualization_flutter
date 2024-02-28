@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:data_visualization/data/breed_repository.dart';
+import 'package:data_visualization/data/repository/breed_repository.dart';
 import 'package:data_visualization/domain/model/breed/breed.dart';
 import 'package:data_visualization/domain/model/breed/breed_filter.dart';
 import 'package:data_visualization/presentation/util/subscription_bloc.dart';

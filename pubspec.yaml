@@ -39,6 +39,7 @@ dependencies:
   fl_chart: ^0.66.2
   word_cloud: ^1.0.1
   stream_transform:
+  provider:
 
 dev_dependencies:
   flutter_test:

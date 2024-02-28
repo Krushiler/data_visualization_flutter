@@ -1,28 +1,19 @@
 import 'package:csv/csv.dart';
+import 'package:data_visualization/data/storage/breed_filter_storage.dart';
+import 'package:data_visualization/data/storage/breeds_storage.dart';
 import 'package:data_visualization/domain/model/breed/breed.dart';
 import 'package:data_visualization/domain/model/breed/breed_filter.dart';
 import 'package:data_visualization/domain/model/common/range.dart';
 import 'package:flutter/services.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:stream_transform/stream_transform.dart';
 
 class BreedRepository {
-  final BehaviorSubject<List<Breed>> _breeds = BehaviorSubject();
+  final BreedFilterStorage _breedFilterStorage;
+  final BreedsStorage _breedsStorage;
 
-  Stream<List<Breed>> watchBreeds() => _breeds.stream;
-
-  Stream<List<Breed>> watchFilteredBreeds() => _breeds.stream.combineLatest(
-        _breedFilter.stream,
-        (breeds, filter) => filter.filter(breeds),
-      );
-
-  final BehaviorSubject<BreedFilter> _breedFilter = BehaviorSubject.seeded(const BreedFilter());
-
-  Stream<BreedFilter> watchFilter() => _breedFilter.stream;
-
-  BreedRepository() {
-    _breeds.listen((value) {
-      _breedFilter.add(BreedFilter(
+  BreedRepository(this._breedFilterStorage, this._breedsStorage) {
+    _breedsStorage.watch().listen((value) {
+      _breedFilterStorage.put(BreedFilter(
         height: value.heightRange,
         weight: value.weightRange,
         lifeSpan: value.lifeSpanRange,
@@ -32,8 +23,17 @@ class BreedRepository {
     });
   }
 
+  Stream<List<Breed>> watchBreeds() => _breedsStorage.watch();
+
+  Stream<List<Breed>> watchFilteredBreeds() => _breedsStorage.watch().combineLatest(
+        _breedFilterStorage.watch(),
+        (breeds, filter) => filter.filter(breeds),
+      );
+
+  Stream<BreedFilter> watchFilter() => _breedFilterStorage.watch();
+
   void applyFilter(BreedFilter filter) {
-    _breedFilter.add(filter);
+    _breedFilterStorage.put(filter);
   }
 
   Future<void> fetchBreeds() async {
@@ -56,6 +56,6 @@ class BreedRepository {
       ));
     }
 
-    _breeds.add(breeds);
+    _breedsStorage.put(breeds);
   }
 }
